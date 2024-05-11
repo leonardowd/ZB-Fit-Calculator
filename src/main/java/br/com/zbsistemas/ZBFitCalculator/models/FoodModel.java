@@ -27,4 +27,8 @@ public class FoodModel implements Serializable {
         this.name = name;
         this.qtCalories = qtCalories;
     }
+
+    public double calculate(double qtCalories, int qtGrams) {
+        return qtCalories * qtGrams;
+    }
 }
