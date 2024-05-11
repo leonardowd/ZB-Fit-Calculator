@@ -16,8 +16,7 @@ public class FoodModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
-    private UUID id;
+    private Long id;
     private String name;
     private Double qtCalories;
 

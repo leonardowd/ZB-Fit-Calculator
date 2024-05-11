@@ -23,7 +23,7 @@ public class FoodController {
     public ResponseEntity<FoodModel> saveFood(@RequestBody @Valid FoodRecordDto foodRecordDto) {
         var foodModel = new FoodModel();
         BeanUtils.copyProperties(foodRecordDto, foodModel);
-        return ResponseEntity.status(HttpStatus.CREATED).body(foodModel.save(foodModel));
+        return ResponseEntity.status(HttpStatus.CREATED).body(foodRepository.save(foodModel));
     }
 
 }
