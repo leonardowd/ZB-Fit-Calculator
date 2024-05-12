@@ -29,18 +29,31 @@ public class FoodService {
         return obj.get();
     }
 
-    public FoodModel save(FoodModel foodModel) {
-        return foodRepository.save(foodModel);
+    public FoodModel save(FoodModel request) {
+        return foodRepository.save(request);
     }
 
-    public FoodModel update(Long id, FoodRecordDto foodRecordDto) {
-            Optional<FoodModel> obj = foodRepository.findById(id);
-            var foodModel = obj.get();
-            BeanUtils.copyProperties(foodRecordDto, foodModel);
-            return foodRepository.save(foodModel);
+    public Object update(Long id, FoodModel request) {
+            Optional<FoodModel> foodModel = foodRepository.findById(id);
+            if (foodModel.isEmpty()) {
+                return "Item not found";
+            }
+            foodModel.get().setName(request.getName());
+            foodModel.get().setQtCalories(request.getQtCalories());
+            return foodRepository.save(foodModel.get());
         }
 
-    public void delete(Long id) {
+    public String delete(Long id) {
+        Optional<FoodModel> obj = foodRepository.findById(id);
+        if (obj.isEmpty()) {
+            return "Item not found";
+        }
+
+        try {
             foodRepository.deleteById(id);
+            return "Item: " + obj.get().getName() + " deleted successfully";
+        } catch (Exception e) {
+            return "Error: " + e.getMessage();
+        }
     }
 }

@@ -3,6 +3,7 @@ package br.com.zbsistemas.ZBFitCalculator.Controllers;
 import br.com.zbsistemas.ZBFitCalculator.dtos.FoodRecordDto;
 import br.com.zbsistemas.ZBFitCalculator.models.FoodModel;
 import br.com.zbsistemas.ZBFitCalculator.repositories.FoodRepository;
+import br.com.zbsistemas.ZBFitCalculator.services.FoodService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,50 +18,35 @@ import java.util.Optional;
 public class FoodController {
 
     @Autowired
-    FoodRepository foodRepository;
-
-    @PostMapping("/foods")
-    public ResponseEntity<FoodModel> saveFood(@RequestBody @Valid FoodRecordDto foodRecordDto) {
-        var foodModel = new FoodModel();
-        BeanUtils.copyProperties(foodRecordDto, foodModel);
-        return ResponseEntity.status(HttpStatus.CREATED).body(foodRepository.save(foodModel));
-    }
+    FoodService foodService;
 
     @GetMapping("/foods")
     public ResponseEntity<List<FoodModel>> getAllFoods() {
-        return ResponseEntity.status(HttpStatus.OK).body(foodRepository.findAll());
+        return ResponseEntity.status(HttpStatus.OK).body(foodService.findAll());
     }
 
     @GetMapping("/foods/{id}")
     public ResponseEntity<Object> findById(@PathVariable(value = "id") Long id) {
-        Optional<FoodModel> obj = foodRepository.findById(id);
-        if (obj.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Item not found");
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(obj.get());
+        return ResponseEntity.status(HttpStatus.OK).body(foodService.findById(id));
+    }
+
+    @PostMapping("/foods")
+    public ResponseEntity<FoodModel> saveFood(@RequestBody @Valid FoodRecordDto foodRecordDto) {
+        FoodModel foodModel = new FoodModel();
+        BeanUtils.copyProperties(foodRecordDto, foodModel);
+        return ResponseEntity.status(HttpStatus.CREATED).body(foodService.save(foodModel));
     }
 
     @PutMapping("/foods/{id}")
-    public ResponseEntity<Object> updateFoodById(@PathVariable(value = "id") Long id,
+    public Object updateFoodById(@PathVariable(value = "id") Long id,
                                                  @RequestBody @Valid FoodRecordDto foodRecordDto) {
-        Optional<FoodModel> obj = foodRepository.findById(id);
-        if (obj.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Item not found");
-        }
-
-        var foodModel = obj.get();
+        FoodModel foodModel = new FoodModel();
         BeanUtils.copyProperties(foodRecordDto, foodModel);
-        return ResponseEntity.status(HttpStatus.OK).body(foodRepository.save(foodModel));
+        return foodService.update(id, foodModel);
     }
 
     @DeleteMapping("/foods/{id}")
-    public ResponseEntity<Object> deleteFoodById(@PathVariable(value = "id") Long id) {
-        Optional<FoodModel> obj = foodRepository.findById(id);
-        if (obj.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Item not found");
-        }
-
-        foodRepository.delete(obj.get());
-        return ResponseEntity.status(HttpStatus.OK).body("Item " + obj.get().getName() + " deleted successfully");
+    public String deleteFoodById(@PathVariable(value = "id") Long id) {
+        return foodService.delete(id);
     }
 }
