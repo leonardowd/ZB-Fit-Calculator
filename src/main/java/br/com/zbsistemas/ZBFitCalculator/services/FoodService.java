@@ -1,14 +1,11 @@
 package br.com.zbsistemas.ZBFitCalculator.services;
 
-import br.com.zbsistemas.ZBFitCalculator.dtos.FoodRecordDto;
 import br.com.zbsistemas.ZBFitCalculator.models.FoodModel;
 import br.com.zbsistemas.ZBFitCalculator.repositories.FoodRepository;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service

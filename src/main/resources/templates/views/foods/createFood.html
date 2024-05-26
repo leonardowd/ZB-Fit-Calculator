@@ -6,15 +6,15 @@
 <body>
 <header th:replace="/myTemplates/template :: header"></header>
 <div class="container">
-    <form action="@{/cadastrar-alimento}" th:object="${food}" method="post">
+    <form th:action="@{/save}" th:object="${food}" method="post">
         <div class="mb-3">
             <input type="hidden" th:field="*{id}">
             <label for="name" class="form-label">Nome do alimento</label>
             <input type="text" th:field="*{name}" class="form-control" id="name" aria-describedby="name">
         </div>
         <div class="mb-3">
-            <label for="qtdCalories" class="form-label">Quantidade de calorias por 1 grama</label>
-            <input type="text" th:field="*{qtdCalories}" class="form-control" id="qtdCalories">
+            <label for="qtCalories" class="form-label">Quantidade de calorias por 1 grama</label>
+            <input type="text" th:field="*{qtCalories}" class="form-control" id="qtCalories">
             <div id="qtdCaloriesHelp" class="form-text">Para saber a quantidade de calorias por grama, é só
                     pegar o valor das calorias por 100 gramas e dividir por 100</div>
         </div>

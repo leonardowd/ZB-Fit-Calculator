@@ -5,6 +5,8 @@ import br.com.zbsistemas.ZBFitCalculator.services.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +26,7 @@ public class FoodController {
         return "/views/foods/listFoods";
     }
 
-    @PostMapping("/cadastrar-alimento")
+    @GetMapping("/cadastrar")
     public String createFood(Model model) {
         FoodModel food = new FoodModel();
 
@@ -34,6 +36,12 @@ public class FoodController {
        return "/views/foods/createFood";
     }
 
+    @PostMapping("/save")
+    public String save(@Validated @ModelAttribute FoodModel food, BindingResult result, Model model) {
+        foodService.save(food);
+        return "redirect:/alimentos";
+    }
+
     @PutMapping("/editar-alimento/{id}")
     public String updateFood(Model model, @PathVariable("id") Long id) {
         FoodModel food = (FoodModel) foodService.findById(id);
@@ -41,7 +49,7 @@ public class FoodController {
         model.addAttribute("title", "Formulário editar alimento");
         model.addAttribute("food", food);
 
-        return "/cadastrar-alimento";
+        return "/save";
     }
 
     @DeleteMapping("/deletar-alimento/{id}")
