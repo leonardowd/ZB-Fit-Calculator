@@ -1,52 +1,54 @@
 package br.com.zbsistemas.ZBFitCalculator.Controllers;
 
-import br.com.zbsistemas.ZBFitCalculator.dtos.FoodRecordDto;
 import br.com.zbsistemas.ZBFitCalculator.models.FoodModel;
-import br.com.zbsistemas.ZBFitCalculator.repositories.FoodRepository;
 import br.com.zbsistemas.ZBFitCalculator.services.FoodService;
-import jakarta.validation.Valid;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
-@RestController
+@Controller
 public class FoodController {
 
     @Autowired
     FoodService foodService;
 
-    @GetMapping("/foods")
-    public ResponseEntity<List<FoodModel>> getAllFoods() {
-        return ResponseEntity.status(HttpStatus.OK).body(foodService.findAll());
+    @GetMapping("/alimentos")
+    public String listFoods(Model model) {
+        List<FoodModel> list = foodService.findAll();
+
+        model.addAttribute("title", "Food list");
+        model.addAttribute("foods", list);
+        return "/views/foods/listFoods";
     }
 
-    @GetMapping("/foods/{id}")
-    public ResponseEntity<Object> findById(@PathVariable(value = "id") Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(foodService.findById(id));
+    @PostMapping("/cadastrar-alimento")
+    public String createFood(Model model) {
+        FoodModel food = new FoodModel();
+
+        model.addAttribute("title", "Formulário Cadastrar alimento");
+        model.addAttribute("food", food);
+
+       return "/views/foods/createFood";
     }
 
-    @PostMapping("/foods")
-    public ResponseEntity<FoodModel> saveFood(@RequestBody @Valid FoodRecordDto foodRecordDto) {
-        FoodModel foodModel = new FoodModel();
-        BeanUtils.copyProperties(foodRecordDto, foodModel);
-        return ResponseEntity.status(HttpStatus.CREATED).body(foodService.save(foodModel));
+    @PutMapping("/editar-alimento/{id}")
+    public String updateFood(Model model, @PathVariable("id") Long id) {
+        FoodModel food = (FoodModel) foodService.findById(id);
+
+        model.addAttribute("title", "Formulário editar alimento");
+        model.addAttribute("food", food);
+
+        return "/cadastrar-alimento";
     }
 
-    @PutMapping("/foods/{id}")
-    public Object updateFoodById(@PathVariable(value = "id") Long id,
-                                                 @RequestBody @Valid FoodRecordDto foodRecordDto) {
-        FoodModel foodModel = new FoodModel();
-        BeanUtils.copyProperties(foodRecordDto, foodModel);
-        return foodService.update(id, foodModel);
-    }
+    @DeleteMapping("/deletar-alimento/{id}")
+    public String deleteFood(@PathVariable("id") Long id) {
+        foodService.delete(id);
+        System.out.println("Deleted sucessfully");
 
-    @DeleteMapping("/foods/{id}")
-    public String deleteFoodById(@PathVariable(value = "id") Long id) {
-        return foodService.delete(id);
+        return "redirect:/alimentos";
     }
 }

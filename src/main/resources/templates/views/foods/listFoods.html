@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/myTemplates/template :: head">
+    <meta charset="UTF-8">
+</head>
+<body>
+<header th:replace="/myTemplates/template :: header"></header>
+<div class="card">
+    <div class="card-body">
+        <h3 class="card-title">Tabela de alimentos</h3>
+        <a class="btn btn-success" th:href="@{/views/foods/cadastrar-alimento}" th:text="'Criar'"
+           th:title="criar"></a>
+        <table class="table table-success table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Alimentos:</th>
+                    <th scope="col">Calorias por grama</th>
+                    <th scope="col">Editar Alimento</th>
+                    <th scope="col">Apagar alimento</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="fl:${foods}">
+                    <th scope="row" th:text="${fl.id}"></th>
+                    <td th:text="${fl.name}"></td>
+                    <td th:text="${fl.qtCalories}"></td>
+                    <td>
+                        <a class="btn btn-info" th:href="@{/views/foods/editar-alimento/} + ${fl.id}" th:text="'Editar'"
+                           th:title="editar"></a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" th:href="@{/views/foods/deletar-alimento/} + ${fl.id}" th:text="Deletar"
+                           th:title="deletar"
+                           onclick="return confirm('Tem certeza que quer apagar?');">
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+<footer th:replace="/myTemplates/template :: footer"></footer>
+</body>
+</html>
