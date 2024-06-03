@@ -47,6 +47,9 @@ public class FoodController {
 
     @PostMapping("/save")
     public String save(@Validated @ModelAttribute FoodModel food, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+
+        }
         foodService.save(food);
         return "redirect:/alimentos";
     }

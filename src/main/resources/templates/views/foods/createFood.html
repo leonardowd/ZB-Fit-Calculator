@@ -12,11 +12,11 @@
         <div class="mb-3">
             <input type="hidden" th:field="*{id}">
             <label for="name" class="form-label">Nome do alimento</label>
-            <input type="text" th:field="*{name}" class="form-control" id="name" aria-describedby="name">
+            <input type="text" th:field="*{name}" class="form-control" id="name" aria-describedby="name" required>
         </div>
         <div class="mb-3">
             <label for="qtCalories" class="form-label">Quantidade de calorias por 1 grama</label>
-            <input type="text" th:field="*{qtCalories}" class="form-control" id="qtCalories">
+            <input type="text" th:field="*{qtCalories}" class="form-control" id="qtCalories" required>
             <div id="qtdCaloriesHelp" class="form-text">Para saber a quantidade de calorias por grama, é só
                     pegar o valor das calorias por 100 gramas e dividir por 100</div>
         </div>
