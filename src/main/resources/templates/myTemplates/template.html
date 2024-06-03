@@ -2,24 +2,23 @@
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
     <meta charset="UTF-8">
-    <title>ZB-Fit Calculator</title>
+    <title>Calories Calculator</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
-<header th:fragment="header">
+<header class="header" th:fragment="header">
     <div class="card">
         <div class="card-header">
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                <div class="container-fluid">
-                    <a class="navbar-brand" th:href="@{/home}">ZB FIT</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" th:href="@{/home}">Home</a>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" aria-current="page" th:href="@{/home}">Home</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" th:href="@{/alimentos}">Lista de alimentos</a>
@@ -32,28 +31,9 @@
     </div>
 
 </header>
-<footer th:fragment="footer" class="fixed-bottom">
-    <div class="card text-center">
-        <div class="card-header">
-            ZB Sistemas
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">Sobre a ZB FIT Calculator</h5>
-            <p class="card-text">ZB FIT Calculator é uma calculadora desenvolvida para que você possa calcular
-                suas calorias sem a necessidade de ficar procurando na internet, e fazendo os cálculos manualmente.
-                Ela conta com uma lista de alimentos já armazenados na base de dados, mas você pode adicionar mais
-                alimentos.
-            </p>
-            <p class="card-text">
-                Atualmente estamos na versão 1.0, onde só é possível utilizar no computador. Se quiser conhecer
-                mais projetos, clique no botão abaixo.
-            </p>
-            <a href="#" class="btn btn-primary">ZB SISTEMAS</a>
-        </div>
-        <div class="card-footer text-body-secondary">
-            2 days ago
-        </div>
-    </div>
+<footer th:fragment="footer" class="footer">
+            <h3 class="text-center h3">Developed by:</h3>
+            <p class="text-center h4"><a href="https://www.linkedin.com/in/leonardowd/" style="text-decoration: none;">Leonardo Vinicius</a></p>
 </footer>
 <script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>

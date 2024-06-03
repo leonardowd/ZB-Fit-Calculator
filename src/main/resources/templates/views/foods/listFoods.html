@@ -5,11 +5,11 @@
 </head>
 <body>
 <header th:replace="/myTemplates/template :: header"></header>
-<div class="card">
+<div class="card containerMargin">
     <div class="card-body">
-        <h3 class="card-title">Tabela de alimentos</h3>
-        <a class="btn btn-success" th:href="@{/cadastrar}" th:text="'Criar'"></a>
-        <table class="table table-success table-striped">
+        <h3 class="card-title text-center">Tabela de alimentos</h3>
+        <a class="btn btn-success" style="margin-bottom: 2%; margin-top: 2%;" th:href="@{/cadastrar}" th:text="'Cadastrar alimento'"></a>
+        <table class="table table-light table-striped">
             <thead>
                 <tr>
                     <th scope="col">Id</th>

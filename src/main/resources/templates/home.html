@@ -5,6 +5,39 @@
 </head>
 <body>
 <header th:replace="/myTemplates/template :: header"></header>
+<div class="card containerMargin">
+    <div class="card-body centralize justify-content-center">
+        <h3 class="card-title text-center">Calculadora calorias</h3>
+        <form class="row g-3" th:object="${showFood}">
+            <div class="col-md-6">
+                <label for="foodsName" class="form-label">Lista de alimentos</label>
+                <select class="form-control" id="foodsName" onchange="showFoodCalories()">
+                    <option value="#" selected>Escolha um alimento</option>
+                    <option th:each="sf:${showFood}"
+                            th:value="${sf.qtCalories}"
+                            th:text="${sf.name}">
+                    </option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="gramsFood" class="form-label">Calorias por grama</label>
+                <input type="text" class="form-control" id="gramsFood" value="" readonly>
+            </div>
+            <div class="col-12">
+                <label for="inputGrams" class="form-label">Insira a quantidade de gramas pesada</label>
+                <input type="number" class="form-control" id="inputGrams" placeholder="Exemplo: 300">
+            </div>
+            <div class="col-md-12 text-center">
+                <input type="submit" class="btn btn-info" value="Calcular" style="width: 100%;" onclick="calculate()"/>
+            </div>
+            <div class="col-md-12">
+                <label for="showCalories" class="form-label">Total calorias</label>
+                <input type="text" class="form-control text-center" id="showCalories" value="" readonly>
+            </div>
+        </form>
+    </div>
+</div>
 <footer th:replace="/myTemplates/template :: footer"></footer>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
 </body>
 </html>

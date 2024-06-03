@@ -26,6 +26,15 @@ public class FoodController {
         return "/views/foods/listFoods";
     }
 
+    @GetMapping("/home")
+    public String showFoods(Model model) {
+        List<FoodModel> list = foodService.findAll();
+
+        model.addAttribute("title", "Show Food");
+        model.addAttribute("showFood", list);
+        return "/home";
+    }
+
     @GetMapping("/cadastrar")
     public String createFood(Model model) {
         FoodModel food = new FoodModel();
@@ -42,17 +51,17 @@ public class FoodController {
         return "redirect:/alimentos";
     }
 
-    @PutMapping("/editar-alimento/{id}")
+    @GetMapping("/editar-alimento/{id}")
     public String updateFood(Model model, @PathVariable("id") Long id) {
         FoodModel food = (FoodModel) foodService.findById(id);
 
         model.addAttribute("title", "Formulário editar alimento");
         model.addAttribute("food", food);
 
-        return "/save";
+        return "/views/foods/createFood";
     }
 
-    @DeleteMapping("/deletar-alimento/{id}")
+    @GetMapping("/deletar-alimento/{id}")
     public String deleteFood(@PathVariable("id") Long id) {
         foodService.delete(id);
         System.out.println("Deleted sucessfully");

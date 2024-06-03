@@ -1,0 +1,26 @@
+.header {
+    margin-bottom: 2%;
+    font-size: large;
+    background-color: #ECEDEE;
+}
+
+.containerMargin {
+    width: 95%;
+    margin: auto;
+    padding: 2%;
+}
+
+.footer {
+    margin-top: 0;
+}
+
+.centralize {
+    width: 60%;
+    margin: auto;
+}
+
+#showCalories {
+    height: 85%;
+    font-size: 200%;
+    color: darkblue;
+}
