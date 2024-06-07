@@ -2,7 +2,7 @@
 **Zb Fit Calculator** it's a tool for calculate your dish's calories. The program has a database with some main foods (Brazil), but you can add or delete foods, and edit the calories value and name.
 
 ###Developement goal
-The goal to making this project is learn more about CRUDs in Java, and learn how to integrate the backend with the frontend, using a frontend framework called Thymeleaf.
+The goal to making this project is learn how to integrate the backend with the frontend, using a frontend framework called Thymeleaf.
 
 ####Actual version: 1.0 | JDK 21.
 ####Tools: Java, HTML, CSS, Javascript, Thymeleaf and Springboot.
