@@ -15,4 +15,4 @@ The goal to making this project is learn more about CRUDs in Java, and learn how
 
 ###How to use
 - You can clone the code and run it in your prefer IDE.
-- Or you can download the build in the respository: /main/src/main/resources/build -> open the cmd in the same directory you downloaded the build -> java -jar appName.jar
+- Or you can download the build in the respository: /tree/main/src/main/resources/build -> open the cmd in the same directory you downloaded the build -> java -jar appName.jar
