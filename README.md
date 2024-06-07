@@ -5,7 +5,7 @@
 The goal to making this project is learn how to integrate the backend with the frontend, using a frontend framework called Thymeleaf.
 
 ####Actual version: 1.0 | JDK 21.
-####Tools: Java, HTML, CSS, Javascript, Thymeleaf and Springboot.
+####Tools: Java, HTML, CSS, Javascript, Thymeleaf, Springboot and MySQL Database.
 
 ###Project Images:
   ![Home page](https://github.com/leonardowd/ZB-Fit-Calculator/blob/main/src/main/resources/static/images/for%20presenting/home.png)
